@@ -272,6 +272,8 @@ nav .hamburger-menu button img {
   /* margin: 0 auto; */
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+  align-items: flex-end;
+  margin-bottom: 58.5px;
 }
 
 .carousel-secondary .group h1 {
@@ -281,6 +283,90 @@ nav .hamburger-menu button img {
   color: #00A2B0;
   font-size: 62px;
   line-height: 62px;
+}
+
+.carousel-secondary .group .group-right {
+  grid-column-start: 6;
+  grid-column-end: 12;
+  border-top: 1px solid #00A2B0;
+  padding-top: 35px;
+  /* display: flex; */
+}
+
+.carousel-secondary .group .group-right .d-flex {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.carousel-secondary .group .group-right .d-flex .text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  line-height: 28px;
+  color: #007585;
+  width: 399px;
+}
+
+.carousel-secondary .group .group-right .d-flex .brand p {
+  font-family: 'Caveat', cursive;
+  color: #00A2B0;
+  font-size: 36px;
+  line-height: 47px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.carousel-secondary .group .group-right .d-flex .brand img {
+  width: 167px;
+}
+
+/* Slider */
+
+.slider {
+  display: flex;
+}
+
+.slider .slider-item {
+  width: 509px;
+  height: 321px;
+  background-color: #00A2B0;
+  box-shadow: -2px -2px 4px 0 rgba(255,255,255,0.79), 2px 2px 4px 0 rgba(0,0,0,0.37);
+  display: flex;
+  align-items: center;
+  margin-right: 21px;
+}
+
+.slider .slider-item img {
+  max-width: 140px;
+  height: auto;
+  margin: 0 32px 0 41px;
+}
+
+.slider .slider-item .item-body {
+  width: 246px;
+  color: #fff;
+}
+
+.slider .slider-item .item-body .item-title {
+  font-family: 'Barlow', sans-serif;
+  font-size: 38px;
+  line-height: 38px;
+  margin-bottom: 11px;
+}
+
+.slider .slider-item .item-body .item-description {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 17px;
+  line-height: 22px;
+  margin-bottom: 17.5px;
+}
+
+.slider .slider-item .item-body button {
+  width: 155px;
+  background-color: inherit;
+  font-family: 'ProximaNovaBold';
+  font-size: 24px;
+  line-height: 24px;
 }
 
 /* !!!!!!!!!!!!!!!!!!!! TO BE DELETED */
