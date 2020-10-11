@@ -1,7 +1,5 @@
-/* font-family: 'Barlow', sans-serif; */
-/*  font-family: 'Montserrat', sans-serif; */
-/* font-family: 'Caveat', cursive; */
-
+/* Proxima Nova is not available for free anymore on Google Fonts */
+/* Had to download it from somewhere else */
 @font-face {
   font-family: ProximaNovaBold;
   src: url("../fonts/ProximaNovaBold.otf") format("opentype");
@@ -26,7 +24,7 @@ body {
 
 .container {
   margin: 0 auto;
-  width: 1240px;
+  max-width: 1240px;
 }
 
 .btn-cta {
@@ -44,8 +42,7 @@ body {
 /* ====== Navigation Bar | Menu ====== */
 
 nav {
-  /* width: 100%; */
-  width: 1237px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -70,6 +67,20 @@ nav ul {
   display: flex;
   color: #5E5E5E;
   /* width: 880px; */
+}
+
+nav ul li {
+  padding-right: 20px;
+}
+
+nav ul li::after {
+  position: relative;
+  content: '|';
+  right: -10px;
+}
+
+nav ul li:last-child::after {
+  content: '';
 }
 
 nav ul a {
@@ -103,7 +114,7 @@ nav .hamburger-menu button:active {
 }
 
 nav .cart button {
-  margin-right: 33px;
+  margin-right: 40px;
 }
 
 nav .cart button img {
@@ -113,11 +124,12 @@ nav .cart button img {
 nav .hamburger-menu button {
   display: flex;
   align-items: center;
+  width: 40px;
+  height: 40px;
 }
 
 nav .hamburger-menu button img {
-  height: 25px;
-  width: 36px;
+  width: 100%;
 }
 
 /* ====== Hero Section ====== */
@@ -141,7 +153,6 @@ nav .hamburger-menu button img {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   align-items: center;
-
 }
 
 .hero .container .jumbotron .jumbotron-text {
@@ -173,7 +184,6 @@ nav .hamburger-menu button img {
   letter-spacing: 1px;
   background-color: #DDD6CE;
   padding: 9px 20px 13px 20px;
-  /* ================================================================================ NOT WORKIG FONT WEIGHT */
   font-weight: 800px;
   margin-top: 23px;
 }
@@ -304,10 +314,88 @@ nav .hamburger-menu button img {
   border: 1px solid #FFCB3E;
 }
 
+/* ======= Mobile Banner ======== */
+.mobile-banner {
+  display: none;
+  position: relative;
+  
+  margin: 0 20px;
+  
+  
+}
+
+.mobile-banner::before {
+  position: absolute;
+  content: '';
+  top: -400px;
+  left: -200px; 
+  right: 50%;
+  bottom: 0;
+  background-color: #F6F5FA;
+  z-index: -2;
+}
+
+.mobile-banner.container {
+  padding: 0;
+}
+
+.mobile-banner .wrapper {
+  max-height: 470px;
+  max-width: 334px;
+  margin: 0 auto;
+  background: url('../images/woman_yawn.jpg') no-repeat center center/cover;
+  -webkit-box-shadow: 6px 5px 4px -4px rgba(0,0,0,0.3);
+  -moz-box-shadow: 6px 5px 4px -4px rgba(0,0,0,0.3);
+  box-shadow: 6px 5px 4px -4px rgba(0,0,0,0.3);
+}
+
+.mobile-banner img {
+  position: relative;
+  max-width: 186px;
+  margin-top: 20px;
+  left: -30px;
+}
+
+.mobile-banner p {
+  font-family: 'Barlow', sans-serif;
+  font-size: 36px;
+  line-height: 36px;
+  width: 125px;
+  color: #fff;
+  margin: 0 0 26px 15px;
+}
+
+.mobile-banner button {
+    height: 44px;
+    width: 130px;
+    color: #FFFFFF;
+    font-family: "ProximaNovaBold";
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    background-color: #E97F9F;
+    margin: 0 0 38px 15px;
+}
+
 /* ====== Secondary Carousel Section ====== */
 
 .carousel-secondary {
-  /* overflow: hidden; */
+  position: relative;
+  /* overflow-x: hidden; */
+  padding-top: 52px;
+  height: 900px;
+}
+
+.carousel-secondary::before {
+  position: absolute;
+  content: '';
+  background-color: #E0FDFF;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+  transform: translateX(-63%);
 }
 
 .carousel-secondary .group {
@@ -362,23 +450,26 @@ nav .hamburger-menu button img {
   width: 167px;
 }
 
+.overflow {
+  overflow: hidden;
+}
+
 /* Slider */
 
 .slider-2 {
   display: flex;
   margin-bottom: 20px;
-  transition: transform 0.4s ease-in-out;
-  transform: translateX(-265px);
+  cursor: pointer;
 }
 
 .slider-2 .slider-item {
-  width: 509px;
+  min-width: 509px;
   height: 321px;
   background-color: #00A2B0;
   box-shadow: -2px -2px 4px 0 rgba(255,255,255,0.79), 2px 2px 4px 0 rgba(0,0,0,0.37);
   display: flex;
   align-items: center;
-  margin-right: 21px;
+  margin-right: 20px;
 }
 
 .slider-2 .slider-item:last-child {
@@ -424,7 +515,260 @@ nav .hamburger-menu button img {
   border: 1px solid #00A2B0;
 }
 
-/* !!!!!!!!!!!!!!!!!!!! TO BE DELETED */
-.white-space {
-  height: 300px;
+
+
+/* ======= MEDIA QUERIES ====== */
+
+@media only screen and (max-width: 1240px) {
+  nav {
+    padding: 10px 0;
+    height: 50px;
+  }
+
+  nav .navbar-brand {
+    width: 122px;
+    height: 30px;
+  }
+
+  nav ul {
+    display: none;
+  }
+
+  nav .cart button {
+    margin-right: 24px;
+  }
+
+  nav .cart button img {
+    height: 24px;
+  }
+  
+  nav .hamburger-menu button {
+    width: 30px;
+    /* height: 40px; */
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+
+  .hero {
+    height: 250px;
+  }
+
+  .hero .container {
+    padding: 0;
+  }
+
+  .hero .container .jumbotron .jumbotron-text {
+    margin-left: 40px;
+  }
+
+  .hero .container .jumbotron .jumbotron-text h1 {
+    font-size: 46px;
+    line-height: 42px;
+    height: 84px;
+    margin-bottom: 8px;
+  }
+
+  .hero .container .jumbotron .jumbotron-text h2 {
+    font-size: 15px;
+    width: 188px;
+    height: 57px;
+    line-height: 19px;
+  }
+
+  .hero .container .jumbotron .jumbotron-text button {
+    margin-top: 15px;
+    font-size: 20px;
+    font-family: 'ProximaNovaBold';
+    list-style: 24px;
+    width: 123px;
+    height: 44px;
+    padding: 0;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .hero .container .jumbotron .jumbotron-text {
+    grid-column-start: 7;
+    grid-column-end: 12;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .hero .container .jumbotron .jumbotron-text {
+    grid-column-start: 6;
+    grid-column-end: 12;
+    margin-left: 10px;
+  }
+
+  .carousel-primary {
+    margin-bottom: 26px;
+  }
+
+  .slider-1 {
+    height: 250px;
+  }
+
+  .box {
+    height: 230px;
+    min-width: 270px;
+    margin: 0 10px;
+  }
+
+  .box .box-body img {
+    width: 110px;
+    height: 235px;
+    margin-top: 15px;
+  }
+
+  .box.box-1 .box-body .group img,
+  .box.box-2 .box-body .group img,
+  .box.box-3 .box-body .group img {
+    margin: 30px 0 5px 0;
+  }
+
+  .box.box-1 .box-body .group img {
+    width: 130px;
+  }
+  
+  .box.box-2 .box-body .group img {
+    height: 33px;
+  }
+  
+  .box.box-3 .box-body .group img {
+    width: 100px;
+    height: 32px;
+  }
+
+  .box .box-body .group p {
+    font-family: 'Caveat', cursive;
+    font-size: 24px;
+    line-height: 24px;
+    width: 146px;
+    letter-spacing: 0.4px;
+    height: 72px;
+    margin: 0 0 20px 0;
+  }
+
+  .box.box-1 .group p {
+    margin-bottom: 10px !important;
+  }
+
+  .box .box-body .group button {
+    padding: 0;
+    width: 146px;
+    height: 44px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .buttons-group button {
+    width: 13px;
+    height: 12px;
+    margin-right: 10px;
+  }
+
+  .mobile-banner {
+    display: block;
+  }
+
+  .carousel-secondary {
+    height: 560px;
+  }
+
+  .carousel-secondary::before {
+    position: absolute;
+    content: '';
+    background-color: #E0FDFF;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    transform: translate(0%, -7%);
+  }
+
+  .carousel-secondary .group h1 {
+    grid-column-start: 3;
+    grid-column-end: 6;
+    font-size: 30px;
+    line-height: 30px;
+    width: 125px;
+  }
+
+  .carousel-secondary .group .group-right {
+    grid-column-start: 6;
+    grid-column-end: 13;
+    padding-top: 15px;
+  }
+
+  .carousel-secondary .group .group-right .d-flex .text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    line-height: 17px;
+    color: #007585;
+    /* width: 399px; */
+  }
+
+  .carousel-secondary .group .group-right .d-flex .brand {
+    display: none;
+  }
+
+  .slider-2 .slider-item {
+    min-width: 303px;
+    height: 230px;
+    margin-right: 15px;
+  }
+
+  .slider-2 .slider-item img {
+    max-width: 110px;
+    margin: 0 20px 0 15px;
+  }
+  
+  .slider-2 .slider-item .item-body {
+    width: 138px;
+  }
+  
+  .slider-2 .slider-item .item-body .item-title {
+    font-size: 26px;
+    line-height: 26px;
+  }
+  
+  .slider-2 .slider-item .item-body .item-description {
+    font-size: 13px;
+    line-height: 13px;
+  }
+  
+  .slider-2 .slider-item .item-body button {
+    width: 125px;
+    height: 44px;
+    font-size: 20px;
+    line-height: 24px;
+    padding: 0;
+  }
+
+  .carousel-secondary .buttons-group button {
+    background-color: #fff;
+    border: 1px solid #00A2B0;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .hero {
+    margin-bottom: 34px;
+  }
+  .hero .container .jumbotron {
+    background: url("../images/hero_image_women_mobile.jpg") no-repeat center center;
+    background-position-x: 0px;
+    background-size: auto 100%;
+  }
+
+  .hero .container .jumbotron .jumbotron-text {
+    margin-left: 0px;
+  }
+
+  .carousel-secondary .group h1 {
+    grid-column-start: 1;
+  }
 }

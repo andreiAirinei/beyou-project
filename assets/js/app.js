@@ -1,9 +1,3 @@
-// ############### NOTICE #####################
-// Code needs to be Refactored
-// This a bit more than a Minimum Viable Product
-// ############################################
-
-
 // ############ Functionality of First Carousel ############
 
 // ### Select Elements
@@ -11,117 +5,125 @@ const primarySlider = document.querySelector('#slider-primary');
 const primaryProducts = document.querySelectorAll('#slider-primary .box');
 const primaryBtnGroup = document.querySelectorAll('.carousel-primary .buttons-group .buttons');
 
-// NodeList to Array
-const primaryBtnGroupArray = Array.from(primaryBtnGroup);
+const secondSlider = document.querySelector('#slider-secondary');
+const secondProducts = document.querySelectorAll('#slider-secondary .slider-item');
+const secondBtnGroup = document.querySelectorAll('.carousel-secondary .buttons-group .buttons');
 
-// Get the size of an Item in the Slider
-// 20 -> the X axis margins
-const primaryItemSize = primaryProducts[0].clientWidth + 20;
-const primarySliderWidth = primaryItemSize * (primaryProducts.length);
+slide(primarySlider, primaryProducts, primaryBtnGroup);
+slide(secondSlider, secondProducts, secondBtnGroup, 360);
 
-// Set the Default active button
-primaryBtnGroupArray[1].classList.add('active');
-primarySlider.style.transform = `translateX(-${primaryItemSize}px)`;
+// ### SLIDER FUNCTION
+function slide(slider, products, btnGroup, offsetX = 0) {
+  // NodeList to Array
+  const btnGroupArray = Array.from(btnGroup);
 
-// Remember the last button pressed
-// Initial value is the Default button declared above 
-let lastBtnPressed = primaryBtnGroupArray[1];
+  // Get the size of an Item in the Slider
+  // 20 -> the X axis margins
+  const itemSize = products[0].clientWidth + 20;
+  const sliderWidth = itemSize * (products.length);
 
-// Function triggered on button click events
-const handlePrimarySlider = (e) => {
-  // Remove 'active' class from previous button
-  lastBtnPressed.classList.remove('active');
-  // Reference the current button as the last button pressed
-  lastBtnPressed = e.target;
-  // Add 'active' class to it
-  e.target.classList.add('active');
-  // Add smooth transition to the slider
-  primarySlider.style.transition = 'transform 0.4s ease-in-out';
-  // Dataset comes as a String
-  let position = parseInt(e.target.dataset.position);
-  // Translate the slider by multiplying the item position with the Item width
-  primarySlider.style.transform = `translateX(-${primaryItemSize * position}px)`;
-}
+  // Set the Default active button
+  btnGroupArray[1].classList.add('active');
+  slider.style.transform = `translateX(-${itemSize - offsetX}px)`;
 
-// ### Add event listeners to each button from the group
-primaryBtnGroupArray.map(btn => btn.addEventListener('click', handlePrimarySlider));
+  // Remember the last button pressed
+  // Initial value is the Default button declared above 
+  let lastBtnPressed = btnGroupArray[1];
 
-// ### Slider Event Listeners
-primarySlider.addEventListener('transitionend', () => {
-  // Remove the transition
-  primarySlider.style.transition = null;
-});
+  // Function triggered on button click events
+  const handleSlider = (e) => {
+    // Remove 'active' class from previous button
+    lastBtnPressed.classList.remove('active');
+    // Reference the current button as the last button pressed
+    lastBtnPressed = e.target;
+    // Add 'active' class to it
+    e.target.classList.add('active');
+    // Add smooth transition to the slider
+    slider.style.transition = 'transform 0.4s ease-in-out';
+    // Dataset comes as a String
+    let position = parseInt(e.target.dataset.position);
+    // Translate the slider by multiplying the item position with the Item width
+    slider.style.transform = `translateX(-${itemSize * position}px)`;
+  }
 
-primarySlider.addEventListener('mousedown', dragStart);
+  // ### Add event listeners to each button from the group
+  btnGroupArray.map(btn => btn.addEventListener('click', handleSlider));
 
-// Get cursor's initial position
-let posInitial;
-let sliderCurrentTransformValue;
-let toTransform;
-let distance;
-let threshold = 150;
-const dragLimit = primarySliderWidth - primaryItemSize * 3;
+  // ### Slider Event Listeners
+  slider.addEventListener('transitionend', () => {
+    // Remove the transition
+    slider.style.transition = null;
+  });
 
-// Drag Start
-function dragStart(e) {
-  // Remove any transition animation
-  primarySlider.style.transition = null;
+  slider.addEventListener('mousedown', dragStart);
 
-  e.preventDefault();
+  // Get cursor's initial position
+  let posInitial;
+  let sliderCurrentTransformValue;
+  let toTransform;
+  let distance;
+  let threshold = 150;
+  const dragLimit = sliderWidth - itemSize * 3;
 
-  posInitial = e.clientX;
+  // Drag Start
+  function dragStart(e) {
+    // Remove any transition animation
+    slider.style.transition = null;
 
-  // Get current transform value
-  let targetTransformValue = e.currentTarget.style.transform;
-  // Extract the value from matrix with Regular Expressions
-  targetTransformValue = targetTransformValue.replace(/[^\d.]/g, '');
+    e.preventDefault();
 
-  // Parse from String
-  sliderCurrentTransformValue = +targetTransformValue;
+    posInitial = e.clientX;
 
-  // Add event listeners to document
-  document.onmouseup = dragEnd;
-  document.onmousemove = dragAction;
-}
+    // Get current transform value
+    let targetTransformValue = e.currentTarget.style.transform;
+    // Extract the value from matrix with Regular Expressions
+    targetTransformValue = targetTransformValue.replace(/[^\d.]/g, '');
 
-// Drag Moving
-function dragAction(e) {
-  // Distance between initial and current cursor position
-  distance = posInitial - e.clientX;
-  // Add the distance to slider's current transform value
-  toTransform = sliderCurrentTransformValue + distance;
-  // Dragging will stop at the limit of 3 items onscreen
-  if (dragLimit > toTransform)
-    primarySlider.style.transform = `translateX(-${toTransform}px)`;
-}
+    // Parse from String
+    sliderCurrentTransformValue = +targetTransformValue;
 
-// Drag End
-function dragEnd() {
-  shiftSlider();
-  // Remove event listeners from document
-  document.onmouseup = null;
-  document.onmousemove = null;
-}
+    // Add event listeners to document
+    document.onmouseup = dragEnd;
+    document.onmousemove = dragAction;
+  }
 
-function shiftSlider() {
-  // Add smooth transition to the slider
-  primarySlider.style.transition = 'transform 0.4s ease-in-out';
-  distance = Math.abs(distance);
+  // Drag Moving
+  function dragAction(e) {
+    // Distance between initial and current cursor position
+    distance = posInitial - e.clientX;
+    // Add the distance to slider's current transform value
+    toTransform = sliderCurrentTransformValue + distance;
+    // Dragging will stop at the limit of 3 items onscreen
+    if (dragLimit > toTransform)
+      slider.style.transform = `translateX(-${toTransform}px)`;
+  }
 
-  if (distance > threshold && toTransform <= dragLimit) {
-    let newTransform;
+  // Drag End
+  function dragEnd() {
+    shiftSlider();
+    // Remove event listeners from document
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
 
-    if (toTransform > sliderCurrentTransformValue) {
-      newTransform = toTransform + (primaryItemSize - distance);
+  function shiftSlider() {
+    // Add smooth transition to the slider
+    slider.style.transition = 'transform 0.4s ease-in-out';
+    distance = Math.abs(distance);
+
+    if (distance > threshold && toTransform <= dragLimit) {
+      let newTransform;
+
+      if (toTransform > sliderCurrentTransformValue) {
+        newTransform = toTransform + (itemSize - distance);
+      }
+      else {
+        newTransform = toTransform - (itemSize - distance);
+      }
+      slider.style.transform = `translateX(-${newTransform}px)`;
+    } else {
+      // Slide back to original position
+      slider.style.transform = `translateX(-${sliderCurrentTransformValue}px)`;
     }
-    else {
-      newTransform = toTransform - (primaryItemSize - distance);
-    }
-    primarySlider.style.transform = `translateX(-${newTransform}px)`;
-  } else {
-    // Slide back to original position
-    primarySlider.style.transform = `translateX(-${sliderCurrentTransformValue}px)`;
   }
 }
-// ############ Functionality of Second Carousel ############
-
