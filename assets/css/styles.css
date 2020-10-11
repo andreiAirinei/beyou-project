@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: ProximaNovaBold;
-  src: url("/assets/fonts/ProximaNovaBold.otf") format("opentype");
+  src: url("../fonts/ProximaNovaBold.otf") format("opentype");
 }
 
 * {
@@ -136,7 +136,7 @@ nav .hamburger-menu button img {
 
 .hero .container .jumbotron {
   height: 100%;
-  background: url('/assets/images/hero_image_women.jpg') no-repeat center center;
+  background: url("../images/hero_image_women.jpg") no-repeat center center;
   background-size: auto 100%;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
